@@ -19,7 +19,7 @@ export const logout_admin = async () => {
   }
 
   const response = await axiosClient.post("/admin/auth/logout", {
-    refreshToken: JSON.parse(refreshToken),
+    refreshToken: refreshToken,
   });
 
   if (response.data.success === true) {
