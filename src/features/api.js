@@ -1,9 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { logout_admin } from "@/features/auth/authService";
 
-// export const API_URL = "https://pbresult.purplebeetech.com/api";
-export const API_URL = "https://api.pbresultvault.com/api";
-
 const handleAsyncError = (error, thunkAPI) => {
   const message =
     (error.response &&
@@ -24,6 +21,7 @@ export const createAsyncThunkWithHandler = (name, thunkFunction) =>
       }
       return result;
     } catch (error) {
+      console.log(error);
       if (error?.response?.status === 401) {
         thunkAPI.dispatch(logout_admin());
         localStorage.removeItem("PBT_access_Token");

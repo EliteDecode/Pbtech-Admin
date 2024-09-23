@@ -4,14 +4,8 @@ const login_admin = async (userData) => {
   const response = await axiosClient.post(`/admin/auth/login`, userData);
 
   if (response.data.success === true) {
-    localStorage.setItem(
-      "PBT_access_Token",
-      JSON.stringify(response.data.data.accessToken)
-    );
-    localStorage.setItem(
-      "PBT_refresh_Token",
-      JSON.stringify(response.data.data.refreshToken)
-    );
+    localStorage.setItem("PBT_access_Token", response.data.data.accessToken);
+    localStorage.setItem("PBT_refresh_Token", response.data.data.refreshToken);
   }
 
   console.log(response.data);

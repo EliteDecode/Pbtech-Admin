@@ -12,7 +12,7 @@ const axiosClient = axios.create({
 axiosClient.interceptors.request.use((config) => {
   const accessToken = localStorage.getItem("PBT_access_Token");
   if (accessToken) {
-    config.headers["Authorization"] = `Bearer ${JSON.parse(accessToken)}`;
+    config.headers["Authorization"] = `Bearer ${accessToken}`;
   }
   return config;
 });
@@ -24,9 +24,10 @@ axiosClient.interceptors.response.use(
     if (error?.response?.status === 401 && !originalRequest?._retry) {
       originalRequest._retry = true;
       const refreshToken = localStorage.getItem("PBT_refresh_Token");
+
       try {
-        const response = await axios.post("/auth/refresh-token", {
-          token: refreshToken,
+        const response = await axiosClient.post(`/admin/auth/refresh-token`, {
+          refreshToken: refreshToken,
         });
         const newAccessToken = response.data.data.accessToken;
         localStorage.setItem("PBT_access_Token", newAccessToken);

@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { LoginSchema } from "@/lib/schemas";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Box, IconButton, InputAdornment } from "@mui/material";
 import { Typography } from "antd";
 import { useFormik } from "formik";
-import * as yup from "yup";
-import { Input } from "../ui/input";
-import { Email, Visibility, VisibilityOff } from "@mui/icons-material";
-import { Button } from "../ui/button";
-import { LoginSchema } from "@/lib/schemas";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 
 import { login, reset } from "@/features/auth/authSlice";
 import toast from "react-hot-toast";

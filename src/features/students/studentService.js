@@ -1,7 +1,5 @@
 import axios from "axios";
-import { API_URL } from "../api";
 import axiosClient from "../axiosClient";
-
 const addStudent = async (data) => {
   const response = await axiosClient.post(`/student`, data);
 

@@ -5,7 +5,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const token = localStorage.getItem("PBT_access_Token");
 
 const initialState = {
-  token: token ? JSON.parse(token) : null,
+  token: token ? token : null,
   isLoading: false,
   message: "",
   isSuccess: false,

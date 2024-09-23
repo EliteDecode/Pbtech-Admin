@@ -4,6 +4,8 @@ import { Typography } from "antd";
 import EditStudentForm from "../Forms/EditStudentForm";
 import useEditStudentForm from "@/hooks/form-hooks/useEditStudentForm";
 import { DownloadOutlined } from "@ant-design/icons";
+import toast from "react-hot-toast";
+import { CopyIcon } from "@radix-ui/react-icons";
 
 const SingleStudentDetails = ({ singleStudent }) => {
   const { formik, isLoading } = useEditStudentForm();
@@ -52,6 +54,13 @@ const SingleStudentDetails = ({ singleStudent }) => {
       .catch(() => alert("An error occurred while downloading the QR code."));
   };
 
+  const copyLink = () => {
+    navigator.clipboard.writeText(
+      `https://purplebeetech.com/student/${singleStudent?.data?.studentId}`
+    );
+    toast.success("Link copied successfully");
+  };
+
   return (
     <Grid container spacing={4}>
       <Grid item xs={12} sm={12} md={6}>
@@ -75,14 +84,24 @@ const SingleStudentDetails = ({ singleStudent }) => {
                 alt="QR Code"
                 className="sm:w-[80%] w-full bg-white shadow-md rounded-md mb-2"
               />
-              <Button
-                variant="contained"
-                size="small"
-                color="primary"
-                startIcon={<DownloadOutlined />}
-                onClick={handleDownloadQRCode}>
-                Download QR Code
-              </Button>
+              <Box className="space-y-2 flex flex-col justify-center items-center">
+                <Button
+                  variant="contained"
+                  size="small"
+                  color="primary"
+                  startIcon={<DownloadOutlined />}
+                  onClick={handleDownloadQRCode}>
+                  Download QR Code
+                </Button>
+                <Button
+                  variant="contained"
+                  size="small"
+                  color="secondary"
+                  startIcon={<CopyIcon />}
+                  onClick={copyLink}>
+                  Copy Link
+                </Button>
+              </Box>
             </Box>
           </Box>
         </Box>
